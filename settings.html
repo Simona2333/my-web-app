@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="settings-page">
+            <div class="settings-header">
+                <div class="settings-logo-area">
+                    <span class="settings-app-name">Mindloop</span>
+                    <img src="logo.png" alt="Mindloop Logo" class="settings-logo-img" />
+                </div>
+            </div>
+            <div class="settings-list">
+                <div class="settings-item settings-switch-row">
+                    <span>Dark mode</span>
+                    <label class="switch">
+                        <input type="checkbox" id="darkmode-switch" />
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="settings-item settings-language-row">
+                    <span>Language</span>
+                    <span class="settings-language">English</span>
+                    <span class="settings-arrow">&gt;</span>
+                </div>
+                <div class="settings-item settings-link-row">
+                    <span>Privacy Policy</span>
+                    <span class="settings-arrow">&gt;</span>
+                </div>
+                <div class="settings-item settings-link-row">
+                    <span>Terms of Service</span>
+                    <span class="settings-arrow">&gt;</span>
+                </div>
+            </div>
+        </div>
+        <div class="bottom-stripe">
+            <button class="nav-btn" id="nav-music" title="Music" onclick="window.location.href='music.html'"><img src="music-icon.png" alt="Music" class="nav-icon" /></button>
+            <button class="nav-btn" id="nav-home" title="Home" onclick="window.location.href='index.html'"><img src="home-icon.png" alt="Home" class="nav-icon" /></button>
+            <button class="nav-btn active" id="nav-settings" title="Settings"><img src="settings-icon.png" alt="Settings" class="nav-icon" /></button>
+        </div>
+    </div>
+    <script>
+    const darkModeSwitch = document.getElementById('darkmode-switch');
+    const container = document.querySelector('.container');
+    // On load, check localStorage for dark mode
+    if (localStorage.getItem('darkMode') === 'true') {
+        container.classList.add('dark-mode');
+        darkModeSwitch.checked = true;
+    }
+    darkModeSwitch.addEventListener('change', function() {
+        if (this.checked) {
+            container.classList.add('dark-mode');
+            localStorage.setItem('darkMode', 'true');
+        } else {
+            container.classList.remove('dark-mode');
+            localStorage.setItem('darkMode', 'false');
+        }
+    });
+    </script>
+</body>
+</html> 
