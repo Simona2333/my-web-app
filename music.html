@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="music-page">
+            <div class="music-upper">
+                <button class="add-song-btn" onclick="showComingSoonAlert()">
+                    <span class="add-icon add-song">+</span> Add Song
+                </button>
+                <div class="song-list">
+                    <div class="song-item" onclick="selectTimerSound('chill')">
+                        <img src="music-cover.png" class="song-icon" alt="Music">
+                        <span>Chill</span>
+                        <span class="selected-indicator" id="chill-indicator">✓</span>
+                    </div>
+                    <div class="song-item" onclick="selectTimerSound('relax')">
+                        <img src="music-cover.png" class="song-icon" alt="Music">
+                        <span>Relax</span>
+                        <span class="selected-indicator" id="relax-indicator"></span>
+                        <audio src="relax.mp3" id="relax-audio"></audio>
+                    </div>
+                    <div class="song-item" onclick="selectTimerSound('cafe')">
+                        <img src="music-cover.png" class="song-icon" alt="Music">
+                        <span>Cafe</span>
+                        <span class="selected-indicator" id="cafe-indicator"></span>
+                        <audio src="cafe.mp3" id="cafe-audio"></audio>
+                    </div>
+                </div>
+            </div>
+            <hr class="music-divider">
+            <div class="music-lower">
+                <button class="add-playlist-btn" onclick="showComingSoonAlert()">
+                    <span class="add-icon add-playlist">+</span> Add Playlist
+                </button>
+                <div class="playlist-list">
+                    <div class="playlist-item" onclick="selectTimerSound('playlist1')">
+                        <img src="playlist-icon.png" class="playlist-icon" alt="Playlist">
+                        <span>Playlist 1</span>
+                        <span class="selected-indicator" id="playlist1-indicator"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom-stripe">
+            <button class="nav-btn" id="nav-music" title="Music"><img src="music-icon.png" alt="Music" class="nav-icon" /></button>
+            <button class="nav-btn" id="nav-home" title="Home" onclick="window.location.href='index.html'"><img src="home-icon.png" alt="Home" class="nav-icon" /></button>
+            <button class="nav-btn" id="nav-settings" title="Settings" onclick="window.location.href='settings.html'"><img src="settings-icon.png" alt="Settings" class="nav-icon" /></button>
+        </div>
+    </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const container = document.querySelector('.container');
+        if (localStorage.getItem('darkMode') === 'true') {
+            container.classList.add('dark-mode');
+        }
+        // Load the selected timer sound from localStorage
+        const selectedSound = localStorage.getItem('selectedTimerSound') || 'chill';
+        selectTimerSound(selectedSound);
+    });
+
+    function showComingSoonAlert() {
+        alert('This feature is coming soon!');
+    }
+
+    function selectTimerSound(soundId) {
+        // Hide all indicators
+        document.querySelectorAll('.selected-indicator').forEach(indicator => {
+            indicator.textContent = '';
+        });
+        
+        // Show the selected indicator
+        const selectedIndicator = document.getElementById(`${soundId}-indicator`);
+        selectedIndicator.textContent = '✓';
+        
+        // Save the selection to localStorage
+        localStorage.setItem('selectedTimerSound', soundId);
+
+        // Update the audio source in the main page
+        let soundUrl;
+        if (soundId === 'playlist1') {
+            // For playlist, save the sequence of songs
+            soundUrl = JSON.stringify(['chill.mp3', 'relax.mp3', 'cafe.mp3']);
+        } else {
+            soundUrl = `${soundId}.mp3`;
+        }
+        localStorage.setItem('currentTimerSound', soundUrl);
+    }
+    </script>
+</body>
+</html> 
