@@ -16,7 +16,7 @@
     </div>
     <div class="container">
         <div class="logo-area">
-            <!-- Logo image placeholder -->
+      
             <img src="logo.png" alt="Mindloop Logo" class="logo-img" />
         </div>
         <div class="timer-circle-container">
@@ -82,7 +82,7 @@
                 </svg>
             </button>
         </div>
-        <!-- Bottom Navigation Stripe -->
+    
         <div class="bottom-stripe">
             <button class="nav-btn" id="nav-music" title="Music" onclick="window.location.href='music.html'">
                 <img src="music-icon.png" alt="Music" class="nav-icon" />
@@ -101,7 +101,7 @@
             container.classList.add('dark-mode');
         }
         
-        // Set the audio source from localStorage
+    
         const audioPlayer = document.getElementById('audio-player');
         const selectedSound = localStorage.getItem('currentTimerSound') || 'chill.mp3';
         audioPlayer.src = selectedSound;
